@@ -11,7 +11,7 @@ function LoginForm() {
   const [email, setEmail] = useState(
     'anas.alazab@example.come'
   );
-  const [password, setPassword] = useState('123456');
+  const [password, setPassword] = useState('12345678');
   const { login, isLoading } = useLogin();
 
   function handleSubmit(e) {

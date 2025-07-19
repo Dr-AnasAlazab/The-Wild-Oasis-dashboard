@@ -11,7 +11,6 @@ import { useEditCabin } from './useEditCabin';
 function CreateCabinForm({
   cabinToEdit = {},
   setShow,
-  setShowForm,
   onCloseModel,
 }) {
   const { id: editId, ...editValues } = cabinToEdit;
@@ -62,7 +61,6 @@ function CreateCabinForm({
         { ...data, image: image },
         {
           onSuccess: (data) => {
-            setShowForm((show) => !show);
             reset();
             onCloseModel?.();
             console.log(data);

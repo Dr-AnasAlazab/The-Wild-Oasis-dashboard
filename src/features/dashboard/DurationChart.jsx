@@ -1,4 +1,4 @@
-import { useDarkMode } from 'context/DarkModeContext';
+import { useDarkMode } from '../../context/DarkModeContext';
 import {
   Cell,
   Legend,
@@ -8,11 +8,13 @@ import {
   Tooltip,
 } from 'recharts';
 import styled from 'styled-components';
-import { box } from 'styles/styles';
-import Heading from 'ui/Heading';
+// import { box } from 'styles/styles';
+import Heading from '../../ui/Heading';
 
 const ChartBox = styled.div`
-  ${box}
+  background-color: var(---color-grey-0);
+  border: var(---color-grey-100);
+  border-radius: var(---border-radius-md);
   padding: 2.4rem 3.2rem;
 
   grid-column: 3 / span 2;
@@ -205,7 +207,9 @@ function prepareData(startData, stays) {
 
   function incArrayValue(arr, field) {
     return arr.map((obj) =>
-      obj.duration === field ? { ...obj, value: obj.value + 1 } : obj
+      obj.duration === field
+        ? { ...obj, value: obj.value + 1 }
+        : obj
     );
   }
 
@@ -215,11 +219,16 @@ function prepareData(startData, stays) {
       if (num === 1) return incArrayValue(arr, '1 night');
       if (num === 2) return incArrayValue(arr, '2 nights');
       if (num === 3) return incArrayValue(arr, '3 nights');
-      if ([4, 5].includes(num)) return incArrayValue(arr, '4-5 nights');
-      if ([6, 7].includes(num)) return incArrayValue(arr, '6-7 nights');
-      if (num >= 8 && num <= 14) return incArrayValue(arr, '8-14 nights');
-      if (num >= 15 && num <= 21) return incArrayValue(arr, '15-21 nights');
-      if (num >= 21) return incArrayValue(arr, '21+ nights');
+      if ([4, 5].includes(num))
+        return incArrayValue(arr, '4-5 nights');
+      if ([6, 7].includes(num))
+        return incArrayValue(arr, '6-7 nights');
+      if (num >= 8 && num <= 14)
+        return incArrayValue(arr, '8-14 nights');
+      if (num >= 15 && num <= 21)
+        return incArrayValue(arr, '15-21 nights');
+      if (num >= 21)
+        return incArrayValue(arr, '21+ nights');
       return arr;
     }, startData)
     .filter((obj) => obj.value > 0);
@@ -286,23 +295,25 @@ function prepareData(startData, stays) {
 
 function DurationChart({ confirmedStays }) {
   const { isDarkMode } = useDarkMode();
-  const startData = isDarkMode ? startDataDark : startDataLight;
+  const startData = isDarkMode
+    ? startDataDark
+    : startDataLight;
   const data = prepareData(startData, confirmedStays);
 
   return (
     <ChartBox>
-      <Heading type='h2'>Stay duration summary</Heading>
-      <ResponsiveContainer width='100%' height={240}>
+      <Heading type="h2">Stay duration summary</Heading>
+      <ResponsiveContainer width="100%" height={240}>
         <PieChart>
           <Pie
             data={data}
-            nameKey='duration'
-            dataKey='value'
-            cx='40%'
-            cy='50%'
+            nameKey="duration"
+            dataKey="value"
+            cx="40%"
+            cy="50%"
             innerRadius={85}
             outerRadius={110}
-            fill='#4f46e5'
+            fill="#4f46e5"
             paddingAngle={3}
             startAngle={180}
             endAngle={-180}
@@ -319,12 +330,12 @@ function DurationChart({ confirmedStays }) {
           <Legend
             // verticalAlign='bottom'
             // align='center'
-            verticalAlign='middle'
-            align='right'
-            width='30%'
-            layout='vertical'
+            verticalAlign="middle"
+            align="right"
+            width="30%"
+            layout="vertical"
             iconSize={15}
-            iconType='circle'
+            iconType="circle"
           />
         </PieChart>
       </ResponsiveContainer>

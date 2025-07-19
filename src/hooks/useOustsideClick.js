@@ -27,7 +27,7 @@ function useClose(handler, listenCapturing = true) {
           listenCapturing
         );
     },
-    [handler]
+    [handler, listenCapturing]
   );
   return ref;
 }

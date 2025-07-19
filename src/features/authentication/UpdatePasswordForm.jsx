@@ -15,8 +15,7 @@ function UpdatePasswordForm() {
   } = useForm();
   const { errors } = formState;
 
-  const { mutate: updateUser, isLoading: isUpdating } =
-    useUpdatedUser();
+  const { updateUser, isUpdating } = useUpdatedUser();
 
   function onSubmit({ password }) {
     updateUser({ password }, { onSuccess: () => reset() });
